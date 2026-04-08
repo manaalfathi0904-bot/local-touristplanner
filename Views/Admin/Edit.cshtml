@@ -1,0 +1,35 @@
+@model TouristPlanner.Models.Place
+
+@{
+    ViewData["Title"] = "Edit Place";
+}
+
+<div class="hero-box">
+    <h2>Edit Place</h2>
+    <p>Update tourist place information in the system database.</p>
+</div>
+
+<div class="admin-form-box">
+    <form method="post" class="admin-form">
+        <input type="hidden" asp-for="Id" />
+
+        <input asp-for="Name" placeholder="Place Name" />
+        <input asp-for="Category" placeholder="Category" />
+        <input asp-for="Distance" placeholder="Distance" />
+
+        <textarea asp-for="Description" placeholder="Description"></textarea>
+
+        <input asp-for="OpenHours" placeholder="Open Hours" />
+        <input asp-for="TravelTime" placeholder="Travel Time" />
+
+        <textarea asp-for="TravelTips" placeholder="Travel Tips"></textarea>
+
+        <input asp-for="ImagePath" placeholder="Image Path" />
+        <textarea asp-for="MapUrl" placeholder="Map URL"></textarea>
+
+        <div class="admin-form-actions">
+            <button type="submit">Update Place</button>
+            <a href="/Admin" class="back-link-btn">Back to Admin</a>
+        </div>
+    </form>
+</div>

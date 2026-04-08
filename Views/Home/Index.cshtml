@@ -1,0 +1,112 @@
+﻿@model List<TouristPlanner.Models.Place>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="hero-box">
+    <h2>Discover Beautiful Places in and around Batticaloa</h2>
+    <p>Plan your perfect one-day visit within a 25 km radius of Kattankudy</p>
+</div>
+
+<div class="search-title">Find Your Destination</div>
+
+<div class="search-bar-box">
+    <form method="get" class="search-form">
+        <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input
+                type="text"
+                name="search"
+                placeholder="Search tourist places..."
+                value="@Context.Request.Query["search"]" />
+        </div>
+<select name="category" onchange="this.form.submit()">
+    @if (ViewBag.CurrentCategory == "All")
+    {
+        <option value="All" selected>All Categories</option>
+    }
+    else
+    {
+        <option value="All">All Categories</option>
+    }
+
+    @if (ViewBag.CurrentCategory == "Religious")
+    {
+        <option value="Religious" selected>Religious</option>
+    }
+    else
+    {
+        <option value="Religious">Religious</option>
+    }
+
+    @if (ViewBag.CurrentCategory == "Nature")
+    {
+        <option value="Nature" selected>Nature</option>
+    }
+    else
+    {
+        <option value="Nature">Nature</option>
+    }
+
+    @if (ViewBag.CurrentCategory == "Cultural")
+    {
+        <option value="Cultural" selected>Cultural</option>
+    }
+    else
+    {
+        <option value="Cultural">Cultural</option>
+    }
+
+    @if (ViewBag.CurrentCategory == "Landmark")
+    {
+        <option value="Landmark" selected>Landmark</option>
+    }
+    else
+    {
+        <option value="Landmark">Landmark</option>
+    }
+
+    @if (ViewBag.CurrentCategory == "Heritage")
+    {
+        <option value="Heritage" selected>Heritage</option>
+    }
+    else
+    {
+        <option value="Heritage">Heritage</option>
+    }
+
+    @if (ViewBag.CurrentCategory == "Historical")
+    {
+        <option value="Historical" selected>Historical</option>
+    }
+    else
+    {
+        <option value="Historical">Historical</option>
+    }
+</select>
+    </form>
+</div>
+
+<div class="places-grid">
+    @foreach (var place in Model)
+    {
+        if (!string.IsNullOrWhiteSpace(place.Name))
+        {
+            <div class="tour-card">
+                @if (!string.IsNullOrEmpty(place.ImagePath))
+                {
+                    <img src="@place.ImagePath" alt="@place.Name" class="tour-card-image" />
+                }
+
+                <div class="tour-card-body">
+                    <h3>@place.Name</h3>
+                    <p><strong>Category:</strong> @place.Category</p>
+                    <p><strong>Distance:</strong> @place.Distance</p>
+                </div>
+
+                <a href="/Home/Details/@place.Id" class="details-btn">View Details</a>
+            </div>
+        }
+    }
+</div>

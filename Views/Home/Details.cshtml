@@ -1,0 +1,60 @@
+@model TouristPlanner.Models.Place
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="hero-box">
+    <h2>@Model.Name</h2>
+    <p>View important information about this tourist destination.</p>
+</div>
+
+<div class="about-grid">
+    <div class="about-card" style="width: 850px;">
+
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <div style="margin-bottom: 20px; text-align:center;">
+                <img src="@Model.ImagePath" alt="@Model.Name" style="width:100%; max-width:550px; height:320px; object-fit:cover; border-radius:12px;" />
+            </div>
+        }
+
+        <p><strong>Category:</strong> @Model.Category</p>
+        <p><strong>Distance:</strong> @Model.Distance</p>
+        <p><strong>Open Hours:</strong> @Model.OpenHours</p>
+        <p><strong>Travel Time:</strong> @Model.TravelTime</p>
+
+        <div style="margin-top: 20px;">
+            <h3>Travel Tips</h3>
+            <p>@Model.TravelTips</p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h3>Description</h3>
+            <p>@Model.Description</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.MapUrl))
+        {
+            <div style="margin-top: 20px;">
+                <h3>Location Map</h3>
+                <iframe src="@Model.MapUrl" width="100%" height="320" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        }
+@if (TempData["PlanMessage"] != null)
+{
+    <div class="success-message">
+        @TempData["PlanMessage"]
+    </div>
+}
+        <div style="margin-top: 25px; display:flex; gap:12px; flex-wrap:wrap;">
+    <a href="/" style="text-decoration:none;">
+        <button type="button">Back to Home</button>
+    </a>
+
+    <form method="post" asp-action="AddToPlan" asp-route-id="@Model.Id" style="margin:0;">
+        <button type="submit" class="plan-btn">Add to Plan</button>
+    </form>
+</div>
+    </div>
+</div>

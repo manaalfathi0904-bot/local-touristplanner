@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Local Tourist Day Planner</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+    @{
+    var currentPath = Context.Request.Path.Value?.ToLower() ?? "";
+}
+
+<div class="site-title">
+    <h1>Local Tourist Day Planner</h1>
+</div>
+
+<div class="navbar">
+    <a href="/" class="@(currentPath == "/" ? "active" : "")">Home</a>
+    <a href="/Home/Plan" class="@(currentPath.Contains("/home/plan") ? "active" : "")">My Plan</a>
+    <a href="/Page/About" class="@(currentPath.Contains("/page/about") ? "active" : "")">About</a>
+    <a href="/Admin/Login" class="@(currentPath.Contains("/admin") ? "active" : "")">Admin</a>
+</div>
+
+    <div class="page-content">
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Local Tourist Planner | Developed by Manaal SAF</p>
+    </footer>
+
+</body>
+</html>

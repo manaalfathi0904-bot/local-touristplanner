@@ -1,0 +1,72 @@
+@model List<TouristPlanner.Models.Place>
+
+@{
+    ViewData["Title"] = "My Plan";
+}
+
+<div class="hero-box">
+    <h2>My One-Day Visit Plan</h2>
+    <p>View the places you added for your one-day visit.</p>
+</div>
+
+@if (TempData["PlanMessage"] != null)
+{
+    <div class="success-message">
+        @TempData["PlanMessage"]
+    </div>
+}
+
+@if (Model.Count == 0)
+{
+    <div class="about-grid">
+        <div class="about-card" style="width:700px; margin:0 auto;">
+            <h3>Visit Plan</h3>
+            <p>No places added to your plan yet.</p>
+            <p>This section can be extended later with full planning functionality.</p>
+
+            <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+                <a href="/" style="text-decoration:none;">
+                    <button type="button">Back to Home</button>
+                </a>
+
+                <form method="post" asp-action="ClearPlan" style="margin:0;">
+                    <button type="submit" class="clear-btn">Clear Plan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="admin-top-bar" style="margin-bottom:20px;">
+        <form method="post" asp-action="ClearPlan" style="margin:0;">
+            <button type="submit" class="clear-btn">Clear Plan</button>
+        </form>
+    </div>
+
+    <div class="places-grid">
+        @foreach (var place in Model)
+        {
+            <div class="tour-card">
+                @if (!string.IsNullOrEmpty(place.ImagePath))
+                {
+                    <img src="@place.ImagePath" alt="@place.Name" class="tour-card-image" />
+                }
+
+                <div class="tour-card-body">
+                    <h3>@place.Name</h3>
+                    <p><strong>Category:</strong> @place.Category</p>
+                    <p><strong>Distance:</strong> @place.Distance</p>
+                </div>
+
+                <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px;">
+                    <a href="/Home/Details/@place.Id" class="details-btn">View Details</a>
+
+                    <form method="post" asp-action="RemoveFromPlan" asp-route-id="@place.Id" style="margin:0;">
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}

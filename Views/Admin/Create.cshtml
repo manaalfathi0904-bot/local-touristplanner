@@ -1,0 +1,37 @@
+@model TouristPlanner.Models.Place
+
+@{
+    ViewData["Title"] = "Add Place";
+}
+
+<div class="hero-box">
+    <h2>Add New Place</h2>
+    <p>Enter tourist place details and save them to the system database.</p>
+</div>
+
+<div class="admin-form-box">
+    <form method="post" asp-controller="Admin" asp-action="Create" class="admin-form">
+        <input type="text" name="Name" placeholder="Place Name" />
+
+        <input type="text" name="Category" placeholder="Category" />
+
+        <input type="text" name="Distance" placeholder="Distance" />
+
+        <textarea name="Description" placeholder="Description"></textarea>
+
+        <input type="text" name="OpenHours" placeholder="Open Hours" />
+
+        <input type="text" name="TravelTime" placeholder="Travel Time" />
+
+        <textarea name="TravelTips" placeholder="Travel Tips"></textarea>
+
+        <input type="text" name="ImagePath" placeholder="Image Path" />
+
+        <textarea name="MapUrl" placeholder="Map URL"></textarea>
+
+        <div class="admin-form-actions">
+            <button type="submit">Save Place</button>
+            <a href="/Admin" class="back-link-btn">Back to Admin</a>
+        </div>
+    </form>
+</div>

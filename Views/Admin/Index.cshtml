@@ -1,0 +1,42 @@
+@model List<TouristPlanner.Models.Place>
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="hero-box">
+    <h2>Admin Panel</h2>
+    <p>Use this database-backed admin panel to add, edit and manage tourist place information</p>
+</div>
+
+<div class="admin-wrapper">
+    <div class="admin-top-bar">
+        <a href="/Admin/Create" class="admin-add-btn">+ Add New Place</a>
+    </div>
+
+    <div class="places-grid">
+        @foreach (var place in Model)
+        {
+            if (!string.IsNullOrWhiteSpace(place.Name))
+            {
+                <div class="tour-card">
+                    @if (!string.IsNullOrEmpty(place.ImagePath))
+                    {
+                        <img src="@place.ImagePath" alt="@place.Name" class="tour-card-image" />
+                    }
+
+                    <div class="tour-card-body">
+                        <h3>@place.Name</h3>
+                        <p><strong>Category:</strong> @place.Category</p>
+                        <p><strong>Distance:</strong> @place.Distance</p>
+                    </div>
+
+                    <div style="margin-top: 12px;">
+                        <a href="/Admin/Edit/@place.Id" class="action-btn edit-btn">Edit</a>
+                        <a href="/Admin/Delete/@place.Id" class="action-btn delete-btn">Delete</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
